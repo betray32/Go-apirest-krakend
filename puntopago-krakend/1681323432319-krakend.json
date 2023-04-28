@@ -1,0 +1,81 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "port" : 8081,
+  "name": "KrakenD - API Gateway",
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "endpoints": [
+    {
+      "endpoint": "/v1/punto-pago/get-list-services",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "host": [
+            "https://localhost:8080"
+          ],
+          "url_pattern": "/punto-pago/get-list-services",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/punto-pago/get-bill",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "host": [
+            "https://localhost:8080"
+          ],
+          "url_pattern": "/punto-pago/get-bill",
+          "encoding": "json",
+          "sd": "static",
+          "method": "POST"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/punto-pago/pay-bill",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "host": [
+            "https://localhost:8080"
+          ],
+          "url_pattern": "/punto-pago/pay-bill",
+          "encoding": "json",
+          "sd": "static",
+          "method": "POST"
+        }
+      ]
+    }
+  ],
+  "extra_config": {
+    "security/cors": {
+      "allow_origins": [
+        "*"
+      ],
+      "allow_methods": [
+        "GET",
+        "HEAD",
+        "POST"
+      ],
+      "expose_headers": [
+        "Content-Length",
+        "Content-Type"
+      ],
+      "allow_headers": [
+        "Accept-Language"
+      ],
+      "max_age": "12h",
+      "allow_credentials": false,
+      "debug": false
+    }
+  }
+}

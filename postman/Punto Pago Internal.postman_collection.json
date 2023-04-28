@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "c1a07b79-47b3-432f-88df-3c0526c762cb",
+		"name": "Punto Pago Internal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13745866"
+	},
+	"item": [
+		{
+			"name": "KrakenD Punto Pago - Get List Services",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Signature",
+						"value": "805a80be98599204c39ce2e3dcda217cd3183cf3c821d7a70eae50a76fd19067",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8081/v1/punto-pago/get-list-services",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"punto-pago",
+						"get-list-services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "KrakenD Punto Pago - Get Bill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Signature",
+						"value": "805a80be98599204c39ce2e3dcda217cd3183cf3c821d7a70eae50a76fd19067",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<request><command>check</command><service_id>2850</service_id><fields><number>6000-0000</number></fields></request>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/v1/punto-pago/get-bill",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"punto-pago",
+						"get-bill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "KrakenD Punto Pago - Pay Bill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Signature",
+						"value": "805a80be98599204c39ce2e3dcda217cd3183cf3c821d7a70eae50a76fd19067",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<request><command>pay</command><payment_id>246792765</payment_id><amount>10</amount></request>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/v1/punto-pago/pay-bill",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"punto-pago",
+						"pay-bill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto Pago Service - Get List Services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/punto-pago/get-list-services",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"punto-pago",
+						"get-list-services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto Pago Service - Get Bill",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/punto-pago/{serviceProvider}/bills?paymentReference=CUENTA@6000-0000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"punto-pago",
+						"{serviceProvider}",
+						"bills"
+					],
+					"query": [
+						{
+							"key": "paymentReference",
+							"value": "CUENTA@6000-0000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto Pago Service - Pay Bill",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"currency\": \"PAB\",\n  \"amountPaid\": \"50000\",\n  \"serviceProvider\": \"1002\",\n  \"financialTransactionIdentifier\": \"113819\",\n  \"paymentType\": \"fullpayment\",\n  \"requestingOrganisation\": \"55F5E81CCB8602A4\",\n  \"brokerReference\": \"MTS\",\n  \"metadata\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/punto-pago/{billReference}/payments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"punto-pago",
+						"{billReference}",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "billReference",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
